@@ -29,7 +29,7 @@ abstract class AggregateRoot
     /**
      * @return Rhumsaa\Uuid\Uuid
      */
-    final public function getId()
+    public function getId()
     {
         return $this->id;
     }
