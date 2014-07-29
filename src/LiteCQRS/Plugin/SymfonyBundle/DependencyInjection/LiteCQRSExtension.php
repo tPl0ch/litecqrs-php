@@ -51,6 +51,11 @@ class LiteCQRSExtension extends Extension
                 $config['dbal_event_store']['service']
             );
 
+            $container->setParameter(
+                'litecqrs.doctrine.table_event_store.table_name',
+                $config['dbal_event_store']['table_name']
+            );
+
             $container->setAlias('litecqrs.event_store', 'litecqrs.doctrine.event_store');
         }
 
