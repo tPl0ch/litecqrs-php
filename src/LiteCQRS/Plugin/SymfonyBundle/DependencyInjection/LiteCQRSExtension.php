@@ -38,8 +38,19 @@ class LiteCQRSExtension extends Extension
             $loader->load('swiftmailer.xml');
         }
 
-        if ($config['dbal_event_store']) {
+        if (isset($config['dbal_event_store']) && $config['dbal_event_store']['enabled'] === true) {
             $loader->load('dbal_event_store.xml');
+
+            $container->setParameter(
+                'litecqrs.doctrine.table_event_store.connection',
+                $config['dbal_event_store']['connection']
+            );
+
+            $container->setParameter(
+                'litecqrs.doctrine.table_event_store.connection.service',
+                $config['dbal_event_store']['service']
+            );
+
             $container->setAlias('litecqrs.event_store', 'litecqrs.doctrine.event_store');
         }
 

@@ -2,6 +2,7 @@
 
 namespace LiteCQRS\Plugin\SymfonyBundle;
 
+use LiteCQRS\Plugin\SymfonyBundle\DependencyInjection\Compiler\DoctrineEventStorePass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -18,6 +19,7 @@ class LiteCQRSBundle extends Bundle
 
         $container->addCompilerPass(new HandlerPass(), PassConfig::TYPE_AFTER_REMOVING);
         $container->addCompilerPass(new JMSSerializerPass());
+        $container->addCompilerPass(new DoctrineEventStorePass());
     }
 }
 
