@@ -2,8 +2,8 @@
 
 namespace LiteCQRS\Plugin\JMSSerializer;
 
+use JMS\Serializer\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
-use JMS\SerializerBundle\Metadata\ClassMetadata;
 
 /**
  * Metadata Driver for JMS Serializer of LiteCQRS classes.

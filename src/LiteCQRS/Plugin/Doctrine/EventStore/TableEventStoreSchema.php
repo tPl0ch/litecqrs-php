@@ -30,4 +30,12 @@ class TableEventStoreSchema
         $table->addIndex(array('aggregate_type', 'aggregate_id'));
         return $table;
     }
+
+    /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->table;
+    }
 }
