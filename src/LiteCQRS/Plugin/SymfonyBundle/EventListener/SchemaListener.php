@@ -18,8 +18,9 @@ class SchemaListener
     public function postGenerateSchema(GenerateSchemaEventArgs $args)
     {
         $schema = $args->getSchema();
+
         if (!$schema->hasTable($this->schema->getTableName())) {
-            $schema->createTable($this->schema->getTableSchema());
+            $this->schema->getTableSchema($args->getSchema());
         }
     }
 }
