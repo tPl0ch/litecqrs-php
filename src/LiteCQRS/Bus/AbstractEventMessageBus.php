@@ -19,6 +19,15 @@ abstract class AbstractEventMessageBus implements EventMessageBus
         $this->scheduledEvents = new SplObjectStorage();
     }
 
+    public function appendProxyFactory($factory, $priority)
+    {
+        if (isset($this->proxyFactories[$priority])) {
+            throw new \RuntimeException("Cannot add ProxyFactory");
+        }
+
+        $this->proxyFactories[$priority] = $factory;
+    }
+
     public function publish($event)
     {
         if ($this->events->contains($event)) {
