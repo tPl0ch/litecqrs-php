@@ -6,7 +6,7 @@ use LiteCQRS\Bus\EventMessageHeader;
 abstract class DefaultDomainEvent implements DomainEvent
 {
     /**
-     * @var MessageHeader
+     * @var EventMessageHeader
      */
     private $messageHeader;
 
@@ -38,6 +38,9 @@ abstract class DefaultDomainEvent implements DomainEvent
         return end($parts);
     }
 
+    /**
+     * @return EventMessageHeader
+     */
     public function getMessageHeader()
     {
         return $this->messageHeader;
