@@ -23,10 +23,11 @@ class EventProviderQueue implements EventQueue
 
         foreach ($this->identityMap->all() as $aggregateRoot) {
             $id = $this->identityMap->getAggregateId($aggregateRoot);
+            $type = $this->identityMap->getAggregateType($aggregateRoot);
 
             foreach ($aggregateRoot->dequeueAppliedEvents() as $event) {
                 $header = $event->getMessageHeader();
-                $header->aggregateType = get_class($aggregateRoot);
+                $header->aggregateType = $type;
                 $header->aggregateId   = $id;
                 $header->setAggregate(null);
 

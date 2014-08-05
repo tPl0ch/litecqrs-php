@@ -42,5 +42,12 @@ class CouchDBIdentityMap implements IdentityMapInterface
 
         return $class->getIdentifierValue($object);
     }
+
+    public function getAggregateType(EventProviderInterface $object)
+    {
+        $class = $this->objectManager->getClassMetadata(get_class($object));
+
+        return $class->getName();
+    }
 }
 

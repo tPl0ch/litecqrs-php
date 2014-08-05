@@ -48,5 +48,12 @@ class DoctrineIdentityMap implements IdentityMapInterface
 
         return $class->getSingleIdReflectionProperty()->getValue($object);
     }
+
+    public function getAggregateType(EventProviderInterface $object)
+    {
+        $class = $this->entityManager->getClassMetadata(get_class($object));
+
+        return $class->getName();
+    }
 }
 

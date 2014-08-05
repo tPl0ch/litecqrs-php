@@ -20,5 +20,9 @@ class SimpleIdentityMap implements IdentityMapInterface
     {
         return null;
     }
+    public function getAggregateType(EventProviderInterface $object)
+    {
+        return get_class($object);
+    }
 }
 
