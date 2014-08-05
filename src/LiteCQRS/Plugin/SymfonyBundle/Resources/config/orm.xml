@@ -6,6 +6,7 @@
     <parameters>
         <parameter key="litecqrs.identity_map.class">LiteCQRS\Plugin\Doctrine\DoctrineIdentityMap</parameter>
         <parameter key="litecqrs.repository.class">LiteCQRS\Plugin\Doctrine\ORMRepository</parameter>
+        <parameter key="litecqrs.orm.manager">doctrine.orm.default_entity_manager</parameter>
     </parameters>
 
     <services>
