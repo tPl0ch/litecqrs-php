@@ -18,7 +18,7 @@ class LiteCQRSBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new HandlerPass(), PassConfig::TYPE_AFTER_REMOVING);
-        $container->addCompilerPass(new JMSSerializerPass());
+        $container->addCompilerPass(new JMSSerializerPass(), PassConfig::TYPE_AFTER_REMOVING);
         $container->addCompilerPass(new DoctrineEventStorePass());
     }
 }
