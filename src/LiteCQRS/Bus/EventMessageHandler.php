@@ -11,6 +11,8 @@ class EventMessageHandler implements MessageHandlerInterface
     private $next;
     private $queue;
     private $eventStore;
+    private $events;
+    private static $firstRun = true;
 
     public function __construct(MessageHandlerInterface $next, EventMessageBus $messageBus, EventQueue $queue = null, EventStoreInterface $eventStore = null)
     {
@@ -18,10 +20,26 @@ class EventMessageHandler implements MessageHandlerInterface
         $this->messageBus  = $messageBus;
         $this->queue = $queue;
         $this->eventStore  = $eventStore;
+        $this->events = new \SplObjectStorage();
     }
 
+    /**
+     * @param $command
+     *
+     * @throws \Exception
+     *
+     * @todo: Remove static attributes, use injection
+     */
     public function handle($command)
     {
+        if (self::$firstRun) {
+            foreach ($this->queue->dequeueAllEvents() as $event) {
+                $this->events->attach($event);
+            }
+
+            self::$firstRun = false;
+        }
+
         try {
             $this->next->handle($command);
             $this->passEventsToStore();
@@ -39,6 +57,10 @@ class EventMessageHandler implements MessageHandlerInterface
         }
 
         foreach ($this->queue->dequeueAllEvents() as $event) {
+            $this->events->attach($event);
+        }
+
+        foreach ($this->events as $event) {
             if ($this->eventStore) {
                 $this->eventStore->store($event);
             }

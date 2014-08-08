@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManager;
 class DoctrineIdentityMap implements IdentityMapInterface
 {
     private $entityManager;
-    private static $firstRun = false;
+    private static $firstRun = true;
 
     public function __construct(EntityManager $entityManager)
     {
