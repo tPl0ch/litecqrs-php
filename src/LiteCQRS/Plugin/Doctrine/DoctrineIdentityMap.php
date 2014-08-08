@@ -28,6 +28,10 @@ class DoctrineIdentityMap implements IdentityMapInterface
         foreach ($uow->getIdentityMap() as $class => $entities) {
             foreach ($entities as $entity) {
                 if (!($entity instanceof EventProviderInterface)) {
+                    // clear untracked entities from EntityManager
+                    $classMeta = $this->entityManager->getClassMetadata(get_class($entity));
+                    $this->entityManager->clear($classMeta->getName());
+
                     break;
                 }
 
