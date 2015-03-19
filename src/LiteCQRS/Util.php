@@ -17,7 +17,9 @@ class Util
      */
     static public function createMicrosecondsNow()
     {
-        return date_create_from_format('U.u', sprintf('%.f', microtime(true)));
+        $dateTime = new \DateTime('now');
+
+        return $dateTime->setTimezone(new \DateTimeZone('UTC'));
     }
 
     /**
